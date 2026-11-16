@@ -93,15 +93,24 @@ export async function POST(request: Request) {
     }
 
     const origin = new URL(request.url).origin;
+    type OnboardingParams = NonNullable<
+      Parameters<
+        typeof stripe.v2.core.accountLinks.create
+      >[0]["use_case"]["account_onboarding"]
+    > & { configurations: string[] };
+
+    const accountOnboarding: OnboardingParams = {
+      configurations: ["merchant"],
+      refresh_url: `${origin}/stripe?email=${encodeURIComponent(email)}`,
+      return_url: `${origin}/stripe/return?account=${accountId}`,
+    };
+
     const link = await stripe.v2.core.accountLinks.create(
       {
         account: accountId,
         use_case: {
           type: "account_onboarding",
-          account_onboarding: {
-            refresh_url: `${origin}/stripe?email=${encodeURIComponent(email)}`,
-            return_url: `${origin}/stripe/return?account=${accountId}`,
-          },
+          account_onboarding: accountOnboarding,
         },
       },
       { apiVersion: CONNECT_API_VERSION },
