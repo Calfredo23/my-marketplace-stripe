@@ -5,7 +5,9 @@ let admin: SupabaseClient | null = null;
 
 export function getSupabaseAdminClient(): SupabaseClient | null {
   const config = getSupabaseConfig();
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
+  const serviceKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ||
+    process.env.SUPABASE_SECRET_KEY?.trim();
   if (!config || !serviceKey) {
     return null;
   }

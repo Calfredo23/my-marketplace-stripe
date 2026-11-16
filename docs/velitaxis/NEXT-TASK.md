@@ -20,10 +20,11 @@ onboarding, and a real test purchase are still pending.
 
 ## Next action
 
-1. Copy the Test 3 `.env.local` values into `marketplace-stripe/.env.local`; add the Stripe
-   test keys, `SUPABASE_SERVICE_ROLE_KEY`, and `STRIPE_WEBHOOK_URL`.
-2. Create the public `my-marketplace-stripe` repo and Vercel project; add the same env names.
-3. Deploy, register the Connect webhook, add `STRIPE_WEBHOOK_SECRET`, redeploy.
+1. Add the four Stripe env names to Vercel:
+   `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`,
+   `STRIPE_PLATFORM_FEE_PERCENT=10`, and later `STRIPE_WEBHOOK_SECRET`.
+2. Set `STRIPE_WEBHOOK_URL=https://my-marketplace-stripe.vercel.app/api/stripe/webhook`.
+3. Register the webhook, add its secret, redeploy.
 4. Onboard a demo seller with a real inbox, test `4242 4242 4242 4242`, verify order + sold,
    capture screenshots, and submit at `apply.capm.us` choosing 4) Stripe Connect.
 

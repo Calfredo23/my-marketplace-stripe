@@ -33,8 +33,9 @@ the existing Marketplace Supabase project: listing status/sold_at, seller_accoun
 The app has `/stripe`, `/stripe/return`, `/api/stripe/connect`, `/api/stripe/checkout`,
 `/api/stripe/webhook`, and `/purchase/success`, plus Buy Now gating and sold states.
 
-Typecheck, lint, build, and unit tests pass. Stripe onboarding, Checkout, and the live webhook
-are not verified yet because the new local `.env.local` and Vercel project are not configured.
+Typecheck, lint, build, and unit tests pass. The new Vercel project is live at
+`https://my-marketplace-stripe.vercel.app` and the Supabase envs are connected. The Stripe
+keys, webhook secret, seller onboarding, and test purchase are still pending.
 
 ## Risks
 

@@ -2,7 +2,7 @@
 
 Test 4: the Test 3 marketplace plus Stripe Connect seller onboarding, Buy Now, platform fees, webhook-confirmed orders, and sold listings.
 
-Live: https://my-marketplace-stripe-calfredo.vercel.app
+Live: https://my-marketplace-stripe.vercel.app
 
 [Source](https://github.com/Calfredo23/my-marketplace-stripe)
 

@@ -4,7 +4,7 @@ import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://my-marketplace-stripe-calfredo.vercel.app";
+  "https://my-marketplace-stripe.vercel.app";
 const title = "The Market — buy, sell, get paid";
 const description =
   "A small marketplace built with Next.js, React, Supabase, and Stripe Connect. List something, browse by category, and buy with Stripe Checkout.";
