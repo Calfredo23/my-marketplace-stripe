@@ -2,6 +2,8 @@ import Stripe from "stripe";
 
 let client: Stripe | null = null;
 
+export const CONNECT_API_VERSION = "2026-06-24.preview";
+
 export const PLATFORM_FEE_PERCENT = Number(
   process.env.STRIPE_PLATFORM_FEE_PERCENT ?? "10",
 );

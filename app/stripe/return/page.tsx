@@ -1,8 +1,9 @@
 import Link from "next/link";
+import type Stripe from "stripe";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { syncSellerAccount } from "@/lib/stripe-accounts";
-import { getStripe } from "@/lib/stripe";
+import { CONNECT_API_VERSION, getStripe } from "@/lib/stripe";
 
 export const dynamic = "force-dynamic";
 
@@ -38,9 +39,13 @@ export default async function StripeReturnPage({
     );
   }
 
-  let account;
+  let account: Stripe.V2.Core.Account;
   try {
-    account = await stripe.accounts.retrieve(accountId);
+    account = await stripe.v2.core.accounts.retrieve(
+      accountId,
+      { include: ["configuration.merchant", "requirements"] },
+      { apiVersion: CONNECT_API_VERSION },
+    );
     await syncSellerAccount(account);
   } catch {
     return (
@@ -64,9 +69,8 @@ export default async function StripeReturnPage({
   }
 
   const complete = Boolean(
-    account.details_submitted &&
-      account.charges_enabled &&
-      account.payouts_enabled,
+    account.configuration?.merchant?.capabilities?.card_payments?.status ===
+      "active",
   );
 
   return (
@@ -88,7 +92,7 @@ export default async function StripeReturnPage({
               </Link>
             ) : (
               <Link
-                href={`/stripe?email=${encodeURIComponent(account.email ?? "")}`}
+                href={`/stripe?email=${encodeURIComponent(account.contact_email ?? "")}`}
                 className="button button-primary"
               >
                 Finish onboarding

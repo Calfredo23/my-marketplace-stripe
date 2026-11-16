@@ -1,6 +1,5 @@
 import type Stripe from "stripe";
 import { NextResponse } from "next/server";
-import { syncSellerAccount } from "@/lib/stripe-accounts";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
@@ -34,7 +33,6 @@ export async function POST(request: Request) {
   }
 
   if (event.type === "account.updated") {
-    await syncSellerAccount(event.data.object as Stripe.Account);
     return NextResponse.json({ received: true });
   }
 

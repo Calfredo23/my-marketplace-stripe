@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
+import { CONNECT_API_VERSION, getStripe } from "@/lib/stripe";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,16 +48,32 @@ export async function POST(request: Request) {
     let accountId = existing?.stripe_account_id as string | undefined;
 
     if (!accountId) {
-      const account = await stripe.accounts.create({
-        type: "express",
-        email,
-        country: "US",
-        business_type: "individual",
-        capabilities: {
-          card_payments: { requested: true },
-          transfers: { requested: true },
+      const account = await stripe.v2.core.accounts.create(
+        {
+          contact_email: email,
+          display_name: "The Market seller",
+          dashboard: "express",
+          identity: {
+            country: "us",
+            entity_type: "individual",
+          },
+          configuration: {
+            merchant: {
+              capabilities: {
+                card_payments: { requested: true },
+              },
+            },
+          },
+          defaults: {
+            currency: "usd",
+            responsibilities: {
+              fees_collector: "application",
+              losses_collector: "stripe",
+            },
+          },
         },
-      });
+        { apiVersion: CONNECT_API_VERSION },
+      );
       accountId = account.id;
 
       const { error: insertError } = await admin
@@ -77,12 +93,19 @@ export async function POST(request: Request) {
     }
 
     const origin = new URL(request.url).origin;
-    const link = await stripe.accountLinks.create({
-      account: accountId,
-      type: "account_onboarding",
-      refresh_url: `${origin}/stripe?email=${encodeURIComponent(email)}`,
-      return_url: `${origin}/stripe/return?account=${accountId}`,
-    });
+    const link = await stripe.v2.core.accountLinks.create(
+      {
+        account: accountId,
+        use_case: {
+          type: "account_onboarding",
+          account_onboarding: {
+            refresh_url: `${origin}/stripe?email=${encodeURIComponent(email)}`,
+            return_url: `${origin}/stripe/return?account=${accountId}`,
+          },
+        },
+      },
+      { apiVersion: CONNECT_API_VERSION },
+    );
 
     return NextResponse.json({ url: link.url });
   } catch (error) {
