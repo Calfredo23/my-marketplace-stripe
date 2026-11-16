@@ -86,12 +86,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: link.url });
   } catch (error) {
-    console.error(
-      "Stripe onboarding failed:",
-      error instanceof Error ? error.message : error,
-    );
+    const detail =
+      error instanceof Error ? error.message : "Unknown Stripe error.";
+    console.error("Stripe onboarding failed:", detail);
     return NextResponse.json(
-      { error: "Stripe onboarding couldn't start. Check the Stripe keys." },
+      {
+        error: "Stripe onboarding couldn't start. Check the Stripe keys.",
+        detail,
+      },
       { status: 502 },
     );
   }
