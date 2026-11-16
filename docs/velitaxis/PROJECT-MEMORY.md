@@ -2,8 +2,8 @@
 
 Framework Version: 1.22.1
 Current Execution Mode: QUALITY
-Project Status: FEATURE_DEVELOPMENT
-Lifecycle Stage: 6 — IMPLEMENTATION
+Project Status: SUBMISSION_READY
+Lifecycle Stage: 10 — DELIVERY AND SUBMISSION
 Owner: Cedrick Alfredo Catimbang (Calfredo)
 
 ## What this is
@@ -28,14 +28,18 @@ Next.js 16.4.6 (App Router), React 19.3, TypeScript strict, Tailwind 4,
 
 ## Current state
 
-A separate `marketplace-stripe` repo was cloned from Test 3. The Stripe schema was applied to
-the existing Marketplace Supabase project: listing status/sold_at, seller_accounts, and orders.
-The app has `/stripe`, `/stripe/return`, `/api/stripe/connect`, `/api/stripe/checkout`,
-`/api/stripe/webhook`, and `/purchase/success`, plus Buy Now gating and sold states.
+The app is live at `https://my-marketplace-stripe.vercel.app`. The seller
+`catimbangcedrickalfredo+stripe@gmail.com` completed Stripe Express onboarding. The Sony
+headphones listing sold for $120 with a $12 platform fee, and the order is paid in Supabase.
+The books and camera listings are active and show Buy Now for the reviewer.
 
-Typecheck, lint, build, and unit tests pass. The new Vercel project is live at
-`https://my-marketplace-stripe.vercel.app` and the Supabase envs are connected. The Stripe
-keys, webhook secret, seller onboarding, and test purchase are still pending.
+Five final app screenshots are in `submission/screenshots/`: home, onboarding, connected,
+checkout, and success. The reviewer still needs to screenshot the Supabase `orders` row.
+
+The webhook route is implemented at `/api/stripe/webhook`, but registration is blocked:
+the shared sandbox already has 16 test webhook endpoints, all belonging to other candidates.
+I did not delete anyone else's endpoint. The success page reconciles the Checkout session and
+marks the order paid and listing sold, so the live purchase flow works without the webhook.
 
 ## Risks
 

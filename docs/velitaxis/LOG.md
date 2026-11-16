@@ -19,3 +19,15 @@
 - Supabase envs were added, including the new Secret key; the admin client now accepts
   `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`.
 - Updated the canonical fallback and README. Stripe keys and webhook are still pending.
+
+## 2026-11-17 — Onboarding, payment, and screenshots
+
+- Completed Stripe Express onboarding with test data for
+  `catimbangcedrickalfredo+stripe@gmail.com`.
+- Updated the Sony listing to that seller. Buy Now appeared, Checkout opened, and the
+  `4242` card paid $120. The order is paid with a $12 platform fee; the listing is Sold.
+- The books and camera listings are active and buyable for the reviewer.
+- Captured home, onboarding, connected, checkout, and success screenshots.
+- Webhook registration is blocked by the shared sandbox’s 16-endpoint cap; all 16 belong to
+  other candidates. The webhook route is implemented; the success page reconciles paid/sold.
+- Next: screenshot the Supabase order row and submit with the webhook-limit note.

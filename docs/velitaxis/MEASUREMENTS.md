@@ -3,8 +3,12 @@
 ## Tests
 
 - Vitest: 18 passing (marketplace validation plus platform fee and sold status).
-- Playwright: 7 marketplace tests inherited from Test 3. Stripe flows need env and a
-  deployed webhook before adding end-to-end coverage.
+- Playwright: 7 marketplace tests inherited from Test 3.
+- Live Stripe: onboarding completed, Buy Now → Checkout, `4242` payment succeeded.
+- Order: $120.00, platform fee $12.00, status paid.
+- Listing: Sony headphones marked sold; books and camera active with Buy Now.
+- Screenshots: home, onboarding, connected, checkout, success. Supabase order row pending.
+- Webhook: route implemented; registration blocked by the shared sandbox’s 16-endpoint cap.
 - Typecheck, lint, build: pass.
 
 ## Database

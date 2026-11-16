@@ -20,13 +20,9 @@ onboarding, and a real test purchase are still pending.
 
 ## Next action
 
-1. Add the four Stripe env names to Vercel:
-   `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`,
-   `STRIPE_PLATFORM_FEE_PERCENT=10`, and later `STRIPE_WEBHOOK_SECRET`.
-2. Set `STRIPE_WEBHOOK_URL=https://my-marketplace-stripe.vercel.app/api/stripe/webhook`.
-3. Register the webhook, add its secret, redeploy.
-4. Onboard a demo seller with a real inbox, test `4242 4242 4242 4242`, verify order + sold,
-   capture screenshots, and submit at `apply.capm.us` choosing 4) Stripe Connect.
+1. Screenshot the paid `orders` row in Supabase.
+2. Submit at `apply.capm.us` choosing **4) Stripe Connect**.
+3. Include the webhook-limit note in the reviewer notes.
 
 ## Acceptance criteria
 
