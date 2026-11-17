@@ -31,3 +31,14 @@
 - Webhook registration is blocked by the shared sandbox’s 16-endpoint cap; all 16 belong to
   other candidates. The webhook route is implemented; the success page reconciles paid/sold.
 - Next: screenshot the Supabase order row and submit with the webhook-limit note.
+
+## 2026-11-17 — Expanded catalog and availability UI
+
+- Added six buyable listings from the onboarded seller: keyboard, planters, speaker, tote,
+  lamp, and running shoes.
+- Catalog is now 12: 8 buyable, 3 “Payments not enabled,” 1 sold. Buyable listings sort first,
+  unavailable next, sold last.
+- Added image overlays and grayscale treatment for sold items; unavailable cards show a
+  “Payments not enabled” badge.
+- Refreshed the live home screenshot. Removed the sold-card body opacity after axe flagged
+  contrast; axe now passes.
