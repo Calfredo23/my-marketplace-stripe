@@ -80,10 +80,10 @@ test("search and category filters update without a page reload", async ({
   await page.getByRole("button", { name: "Furniture" }).click();
   await expect(page.getByTestId("listing-count")).toHaveText("1 listing");
   await page.getByTestId("clear-search").click();
-  await expect(page.getByTestId("listing-count")).toHaveText("6 listings");
+  await expect(page.getByTestId("listing-count")).toHaveText("12 listings");
 
   await page.getByRole("button", { name: "All" }).click();
-  await expect(page.getByTestId("listing-count")).toHaveText("6 listings");
+  await expect(page.getByTestId("listing-count")).toHaveText("12 listings");
   expect(documentRequests).toBe(afterLoad);
 });
 

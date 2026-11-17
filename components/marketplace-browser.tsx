@@ -30,7 +30,7 @@ export function MarketplaceBrowser({
 
   const visibleListings = useMemo(() => {
     const needle = deferredQuery.trim().toLowerCase();
-    return initialListings.filter((listing) => {
+    const filtered = initialListings.filter((listing) => {
       if (category && listing.category !== category) {
         return false;
       }
@@ -42,7 +42,22 @@ export function MarketplaceBrowser({
         listing.description.toLowerCase().includes(needle)
       );
     });
-  }, [initialListings, category, deferredQuery]);
+
+    return [...filtered].sort((left, right) => {
+      const leftBuyable =
+        left.status === "active" && buyableSellerEmails.includes(left.email);
+      const rightBuyable =
+        right.status === "active" && buyableSellerEmails.includes(right.email);
+
+      if (leftBuyable !== rightBuyable) {
+        return leftBuyable ? -1 : 1;
+      }
+      if (left.status !== right.status) {
+        return left.status === "active" ? -1 : 1;
+      }
+      return Date.parse(right.createdAt) - Date.parse(left.createdAt);
+    });
+  }, [initialListings, category, deferredQuery, buyableSellerEmails]);
 
   useEffect(() => {
     window.history.replaceState(null, "", browseHref(category, query));

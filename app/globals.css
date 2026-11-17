@@ -490,6 +490,45 @@
   background: #f7f7f7;
 }
 
+.listing-image-wrap {
+  position: relative;
+}
+
+.listing-status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.listing-status-sold {
+  background: #222222;
+  color: #ffffff;
+}
+
+.listing-status-unavailable {
+  border: 1px solid #dddddd;
+  background: rgba(255, 255, 255, 0.94);
+  color: #6a6a6a;
+}
+
+.listing-card-sold .listing-image {
+  filter: grayscale(1);
+  opacity: 0.78;
+}
+
+.listing-card-unavailable .listing-image {
+  opacity: 0.88;
+}
+
 .listing-image {
   width: 100%;
   height: 100%;
@@ -738,6 +777,10 @@
 }
 
 .listing-collection-list .listing-image-link {
+  width: 100%;
+}
+
+.listing-collection-list .listing-image-wrap {
   width: 240px;
   flex-shrink: 0;
 }
@@ -1431,6 +1474,10 @@
   }
 
   .listing-collection-list .listing-image-link {
+    width: 100%;
+  }
+
+  .listing-collection-list .listing-image-wrap {
     width: 128px;
   }
 
